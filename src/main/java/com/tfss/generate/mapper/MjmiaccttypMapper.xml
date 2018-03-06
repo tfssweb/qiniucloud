@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfss.generate.mapper.MjmiaccttypMapper" >
+  <resultMap id="BaseResultMap" type="com.tfss.generate.dto.Mjmiaccttyp" >
+    <id column="mjaccttypcd" property="mjaccttypcd" jdbcType="VARCHAR" />
+    <result column="mjaccttypdesc" property="mjaccttypdesc" jdbcType="VARCHAR" />
+    <result column="miaccttypcd" property="miaccttypcd" jdbcType="VARCHAR" />
+    <result column="miaccttypdesc" property="miaccttypdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mjaccttypcd, mjaccttypdesc, miaccttypcd, miaccttypdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tfss.generate.dto.MjmiaccttypExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_mjmiaccttyp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_mjmiaccttyp
+    where mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_mjmiaccttyp
+    where mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tfss.generate.dto.MjmiaccttypExample" >
+    delete from t_mjmiaccttyp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tfss.generate.dto.Mjmiaccttyp" >
+    insert into t_mjmiaccttyp (mjaccttypcd, mjaccttypdesc, miaccttypcd, 
+      miaccttypdesc)
+    values (#{mjaccttypcd,jdbcType=VARCHAR}, #{mjaccttypdesc,jdbcType=VARCHAR}, #{miaccttypcd,jdbcType=VARCHAR}, 
+      #{miaccttypdesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tfss.generate.dto.Mjmiaccttyp" >
+    insert into t_mjmiaccttyp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mjaccttypcd != null" >
+        mjaccttypcd,
+      </if>
+      <if test="mjaccttypdesc != null" >
+        mjaccttypdesc,
+      </if>
+      <if test="miaccttypcd != null" >
+        miaccttypcd,
+      </if>
+      <if test="miaccttypdesc != null" >
+        miaccttypdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mjaccttypcd != null" >
+        #{mjaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="mjaccttypdesc != null" >
+        #{mjaccttypdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="miaccttypcd != null" >
+        #{miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="miaccttypdesc != null" >
+        #{miaccttypdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tfss.generate.dto.MjmiaccttypExample" resultType="java.lang.Integer" >
+    select count(*) from t_mjmiaccttyp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_mjmiaccttyp
+    <set >
+      <if test="record.mjaccttypcd != null" >
+        mjaccttypcd = #{record.mjaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mjaccttypdesc != null" >
+        mjaccttypdesc = #{record.mjaccttypdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.miaccttypcd != null" >
+        miaccttypcd = #{record.miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.miaccttypdesc != null" >
+        miaccttypdesc = #{record.miaccttypdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_mjmiaccttyp
+    set mjaccttypcd = #{record.mjaccttypcd,jdbcType=VARCHAR},
+      mjaccttypdesc = #{record.mjaccttypdesc,jdbcType=VARCHAR},
+      miaccttypcd = #{record.miaccttypcd,jdbcType=VARCHAR},
+      miaccttypdesc = #{record.miaccttypdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfss.generate.dto.Mjmiaccttyp" >
+    update t_mjmiaccttyp
+    <set >
+      <if test="mjaccttypdesc != null" >
+        mjaccttypdesc = #{mjaccttypdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="miaccttypcd != null" >
+        miaccttypcd = #{miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="miaccttypdesc != null" >
+        miaccttypdesc = #{miaccttypdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tfss.generate.dto.Mjmiaccttyp" >
+    update t_mjmiaccttyp
+    set mjaccttypdesc = #{mjaccttypdesc,jdbcType=VARCHAR},
+      miaccttypcd = #{miaccttypcd,jdbcType=VARCHAR},
+      miaccttypdesc = #{miaccttypdesc,jdbcType=VARCHAR}
+    where mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </update>
+</mapper>

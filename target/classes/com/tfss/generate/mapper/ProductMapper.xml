@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tfss.generate.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.tfss.generate.dto.Product" >
+    <id column="prodid" property="prodid" jdbcType="INTEGER" />
+    <id column="mjaccttypcd" property="mjaccttypcd" jdbcType="VARCHAR" />
+    <result column="miaccttypcd" property="miaccttypcd" jdbcType="VARCHAR" />
+    <result column="prodname" property="prodname" jdbcType="VARCHAR" />
+    <result column="prodprice" property="prodprice" jdbcType="DOUBLE" />
+    <result column="prodpictureid" property="prodpictureid" jdbcType="INTEGER" />
+    <result column="prodtitle" property="prodtitle" jdbcType="VARCHAR" />
+    <result column="proddesc" property="proddesc" jdbcType="VARCHAR" />
+    <result column="proddetail" property="proddetail" jdbcType="VARCHAR" />
+    <result column="prodadddate" property="prodadddate" jdbcType="TIMESTAMP" />
+    <result column="prodbuycnt" property="prodbuycnt" jdbcType="INTEGER" />
+    <result column="prod1" property="prod1" jdbcType="VARCHAR" />
+    <result column="prod2" property="prod2" jdbcType="VARCHAR" />
+    <result column="prod3" property="prod3" jdbcType="VARCHAR" />
+    <result column="prod4" property="prod4" jdbcType="VARCHAR" />
+    <result column="prod5" property="prod5" jdbcType="VARCHAR" />
+    <result column="datelastmaint" property="datelastmaint" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    prodid, mjaccttypcd, miaccttypcd, prodname, prodprice, prodpictureid, prodtitle, 
+    proddesc, proddetail, prodadddate, prodbuycnt, prod1, prod2, prod3, prod4, prod5, 
+    datelastmaint
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tfss.generate.dto.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.tfss.generate.dto.ProductKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where prodid = #{prodid,jdbcType=INTEGER}
+      and mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.tfss.generate.dto.ProductKey" >
+    delete from t_product
+    where prodid = #{prodid,jdbcType=INTEGER}
+      and mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tfss.generate.dto.ProductExample" >
+    delete from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tfss.generate.dto.Product" >
+    insert into t_product (prodid, mjaccttypcd, miaccttypcd, 
+      prodname, prodprice, prodpictureid, 
+      prodtitle, proddesc, proddetail, 
+      prodadddate, prodbuycnt, prod1, 
+      prod2, prod3, prod4, 
+      prod5, datelastmaint)
+    values (#{prodid,jdbcType=INTEGER}, #{mjaccttypcd,jdbcType=VARCHAR}, #{miaccttypcd,jdbcType=VARCHAR}, 
+      #{prodname,jdbcType=VARCHAR}, #{prodprice,jdbcType=DOUBLE}, #{prodpictureid,jdbcType=INTEGER}, 
+      #{prodtitle,jdbcType=VARCHAR}, #{proddesc,jdbcType=VARCHAR}, #{proddetail,jdbcType=VARCHAR}, 
+      #{prodadddate,jdbcType=TIMESTAMP}, #{prodbuycnt,jdbcType=INTEGER}, #{prod1,jdbcType=VARCHAR}, 
+      #{prod2,jdbcType=VARCHAR}, #{prod3,jdbcType=VARCHAR}, #{prod4,jdbcType=VARCHAR}, 
+      #{prod5,jdbcType=VARCHAR}, #{datelastmaint,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tfss.generate.dto.Product" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodid != null" >
+        prodid,
+      </if>
+      <if test="mjaccttypcd != null" >
+        mjaccttypcd,
+      </if>
+      <if test="miaccttypcd != null" >
+        miaccttypcd,
+      </if>
+      <if test="prodname != null" >
+        prodname,
+      </if>
+      <if test="prodprice != null" >
+        prodprice,
+      </if>
+      <if test="prodpictureid != null" >
+        prodpictureid,
+      </if>
+      <if test="prodtitle != null" >
+        prodtitle,
+      </if>
+      <if test="proddesc != null" >
+        proddesc,
+      </if>
+      <if test="proddetail != null" >
+        proddetail,
+      </if>
+      <if test="prodadddate != null" >
+        prodadddate,
+      </if>
+      <if test="prodbuycnt != null" >
+        prodbuycnt,
+      </if>
+      <if test="prod1 != null" >
+        prod1,
+      </if>
+      <if test="prod2 != null" >
+        prod2,
+      </if>
+      <if test="prod3 != null" >
+        prod3,
+      </if>
+      <if test="prod4 != null" >
+        prod4,
+      </if>
+      <if test="prod5 != null" >
+        prod5,
+      </if>
+      <if test="datelastmaint != null" >
+        datelastmaint,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodid != null" >
+        #{prodid,jdbcType=INTEGER},
+      </if>
+      <if test="mjaccttypcd != null" >
+        #{mjaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="miaccttypcd != null" >
+        #{miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="prodname != null" >
+        #{prodname,jdbcType=VARCHAR},
+      </if>
+      <if test="prodprice != null" >
+        #{prodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="prodpictureid != null" >
+        #{prodpictureid,jdbcType=INTEGER},
+      </if>
+      <if test="prodtitle != null" >
+        #{prodtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="proddesc != null" >
+        #{proddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="proddetail != null" >
+        #{proddetail,jdbcType=VARCHAR},
+      </if>
+      <if test="prodadddate != null" >
+        #{prodadddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prodbuycnt != null" >
+        #{prodbuycnt,jdbcType=INTEGER},
+      </if>
+      <if test="prod1 != null" >
+        #{prod1,jdbcType=VARCHAR},
+      </if>
+      <if test="prod2 != null" >
+        #{prod2,jdbcType=VARCHAR},
+      </if>
+      <if test="prod3 != null" >
+        #{prod3,jdbcType=VARCHAR},
+      </if>
+      <if test="prod4 != null" >
+        #{prod4,jdbcType=VARCHAR},
+      </if>
+      <if test="prod5 != null" >
+        #{prod5,jdbcType=VARCHAR},
+      </if>
+      <if test="datelastmaint != null" >
+        #{datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tfss.generate.dto.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product
+    <set >
+      <if test="record.prodid != null" >
+        prodid = #{record.prodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mjaccttypcd != null" >
+        mjaccttypcd = #{record.mjaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.miaccttypcd != null" >
+        miaccttypcd = #{record.miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodname != null" >
+        prodname = #{record.prodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodprice != null" >
+        prodprice = #{record.prodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.prodpictureid != null" >
+        prodpictureid = #{record.prodpictureid,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodtitle != null" >
+        prodtitle = #{record.prodtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proddesc != null" >
+        proddesc = #{record.proddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proddetail != null" >
+        proddetail = #{record.proddetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodadddate != null" >
+        prodadddate = #{record.prodadddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prodbuycnt != null" >
+        prodbuycnt = #{record.prodbuycnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.prod1 != null" >
+        prod1 = #{record.prod1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prod2 != null" >
+        prod2 = #{record.prod2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prod3 != null" >
+        prod3 = #{record.prod3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prod4 != null" >
+        prod4 = #{record.prod4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prod5 != null" >
+        prod5 = #{record.prod5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datelastmaint != null" >
+        datelastmaint = #{record.datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product
+    set prodid = #{record.prodid,jdbcType=INTEGER},
+      mjaccttypcd = #{record.mjaccttypcd,jdbcType=VARCHAR},
+      miaccttypcd = #{record.miaccttypcd,jdbcType=VARCHAR},
+      prodname = #{record.prodname,jdbcType=VARCHAR},
+      prodprice = #{record.prodprice,jdbcType=DOUBLE},
+      prodpictureid = #{record.prodpictureid,jdbcType=INTEGER},
+      prodtitle = #{record.prodtitle,jdbcType=VARCHAR},
+      proddesc = #{record.proddesc,jdbcType=VARCHAR},
+      proddetail = #{record.proddetail,jdbcType=VARCHAR},
+      prodadddate = #{record.prodadddate,jdbcType=TIMESTAMP},
+      prodbuycnt = #{record.prodbuycnt,jdbcType=INTEGER},
+      prod1 = #{record.prod1,jdbcType=VARCHAR},
+      prod2 = #{record.prod2,jdbcType=VARCHAR},
+      prod3 = #{record.prod3,jdbcType=VARCHAR},
+      prod4 = #{record.prod4,jdbcType=VARCHAR},
+      prod5 = #{record.prod5,jdbcType=VARCHAR},
+      datelastmaint = #{record.datelastmaint,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tfss.generate.dto.Product" >
+    update t_product
+    <set >
+      <if test="miaccttypcd != null" >
+        miaccttypcd = #{miaccttypcd,jdbcType=VARCHAR},
+      </if>
+      <if test="prodname != null" >
+        prodname = #{prodname,jdbcType=VARCHAR},
+      </if>
+      <if test="prodprice != null" >
+        prodprice = #{prodprice,jdbcType=DOUBLE},
+      </if>
+      <if test="prodpictureid != null" >
+        prodpictureid = #{prodpictureid,jdbcType=INTEGER},
+      </if>
+      <if test="prodtitle != null" >
+        prodtitle = #{prodtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="proddesc != null" >
+        proddesc = #{proddesc,jdbcType=VARCHAR},
+      </if>
+      <if test="proddetail != null" >
+        proddetail = #{proddetail,jdbcType=VARCHAR},
+      </if>
+      <if test="prodadddate != null" >
+        prodadddate = #{prodadddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prodbuycnt != null" >
+        prodbuycnt = #{prodbuycnt,jdbcType=INTEGER},
+      </if>
+      <if test="prod1 != null" >
+        prod1 = #{prod1,jdbcType=VARCHAR},
+      </if>
+      <if test="prod2 != null" >
+        prod2 = #{prod2,jdbcType=VARCHAR},
+      </if>
+      <if test="prod3 != null" >
+        prod3 = #{prod3,jdbcType=VARCHAR},
+      </if>
+      <if test="prod4 != null" >
+        prod4 = #{prod4,jdbcType=VARCHAR},
+      </if>
+      <if test="prod5 != null" >
+        prod5 = #{prod5,jdbcType=VARCHAR},
+      </if>
+      <if test="datelastmaint != null" >
+        datelastmaint = #{datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where prodid = #{prodid,jdbcType=INTEGER}
+      and mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tfss.generate.dto.Product" >
+    update t_product
+    set miaccttypcd = #{miaccttypcd,jdbcType=VARCHAR},
+      prodname = #{prodname,jdbcType=VARCHAR},
+      prodprice = #{prodprice,jdbcType=DOUBLE},
+      prodpictureid = #{prodpictureid,jdbcType=INTEGER},
+      prodtitle = #{prodtitle,jdbcType=VARCHAR},
+      proddesc = #{proddesc,jdbcType=VARCHAR},
+      proddetail = #{proddetail,jdbcType=VARCHAR},
+      prodadddate = #{prodadddate,jdbcType=TIMESTAMP},
+      prodbuycnt = #{prodbuycnt,jdbcType=INTEGER},
+      prod1 = #{prod1,jdbcType=VARCHAR},
+      prod2 = #{prod2,jdbcType=VARCHAR},
+      prod3 = #{prod3,jdbcType=VARCHAR},
+      prod4 = #{prod4,jdbcType=VARCHAR},
+      prod5 = #{prod5,jdbcType=VARCHAR},
+      datelastmaint = #{datelastmaint,jdbcType=TIMESTAMP}
+    where prodid = #{prodid,jdbcType=INTEGER}
+      and mjaccttypcd = #{mjaccttypcd,jdbcType=VARCHAR}
+  </update>
+</mapper>
